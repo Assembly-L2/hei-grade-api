@@ -79,7 +79,7 @@ paths:
       security:
         - api: []
 
-  /semester:
+  /semesters:
     post:
       tags:
         - Semester
@@ -110,8 +110,6 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-
-  /semesters:
     get:
       tags:
         - Semester
@@ -137,45 +135,12 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-  /semester/{id}:
+  /semesters/{semester_id}:
     get:
       tags:
         - Semester
       summary: Get semester by id
       operationId: getSemesterById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getsemesterDTO'
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '429':
-          $ref: '#/components/responses/429'
-        '500':
-          $ref: '#/components/responses/500'
-      security:
-        - api: []
-
-  /semester/{semester_id}:
-    put:
-      tags:
-        - Semester
-      summary: Update semester By Id
-      description: 'you can update name start_date end_date status'
-      operationId: UpdateSemesterById
       parameters:
         - name: semester_id
           in: path
@@ -199,15 +164,50 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-
-  /semester/{id_semester}:
+      security:
+        - api: []
+    put:
+      tags:
+        - Semester
+      summary: Update semester By Id
+      description: 'you can update name start_date end_date status'
+      operationId: UpdateSemesterById
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createsemesterDTO'
+        required: true
+      parameters:
+        - name: semester_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getsemesterDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     delete:
       tags:
         - Semester
       operationId: delete semester by Id
       summary: delete one semester by id
       parameters:
-        - name: id_semester
+        - name: semester_id
           in: path
           required: true
           schema:
@@ -231,7 +231,7 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /evaluation:
+  /evaluations:
     post:
       tags:
         - Evaluation
@@ -262,7 +262,6 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /evaluations:
     get:
       tags:
         - Evaluation
@@ -289,14 +288,14 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /evaluation/{id}:
+  /evaluations/{evaluation_id}:
     get:
       tags:
         - Evaluation
       summary: get evaluation by id
       operationId: getEvaluationbyId
       parameters:
-        - name: id
+        - name: evaluation_id
           in: path
           required: true
           schema:
@@ -308,7 +307,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getEvaluationDTO'
-  /evaluation/{evaluation_id}:
     put:
       tags:
         - Evaluation
@@ -345,14 +343,13 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /evaluation/{id_evaluation}:
     delete:
       tags:
         - Evaluation
       summary: delete evaluation by id
       operationId: deleteEvaluationByid
       parameters:
-        - name: id_evaluation
+        - name: evaluation_id
           in: path
           required: true
           schema:
@@ -376,7 +373,7 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /course:
+  /courses:
     post:
       tags:
         - Course
@@ -407,7 +404,6 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /courses:
     get:
       tags:
         - Course
@@ -434,14 +430,14 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /course/{id}:
+  /courses/{course_id}:
     get:
       tags:
         - Course
       summary: get course by id
       operationId: getCoursebyId
       parameters:
-        - name: id
+        - name: course_id
           in: path
           required: true
           schema:
@@ -453,7 +449,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getCourseDTO'
-  /course/{course_id}:
     put:
       tags:
         - Course
@@ -490,14 +485,13 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /course/{id_course}:
     delete:
       tags:
         - Course
       summary: delete course by id
       operationId: deleteCourseByid
       parameters:
-        - name: id_course
+        - name: course_id
           in: path
           required: true
           schema:
@@ -521,7 +515,7 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /grade:
+  /grades:
     post:
       tags:
         - Grade
@@ -552,7 +546,6 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /grades:
     get:
       tags:
         - Grade
@@ -579,14 +572,14 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /grade/{id}:
+  /grades/{grade_id}:
     get:
       tags:
         - Grade
       summary: get grade by id
       operationId: getGradebyId
       parameters:
-        - name: id
+        - name: grade_id
           in: path
           required: true
           schema:
@@ -598,7 +591,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getGradeDTO'
-  /grade/{grade_id}:
     put:
       tags:
         - Grade
@@ -635,14 +627,13 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
-  /grade/{id_grade}:
     delete:
       tags:
         - Grade
       summary: delete grade by id
       operationId: deleteGradeByid
       parameters:
-        - name: id_grade
+        - name: grade_id
           in: path
           required: true
           schema:

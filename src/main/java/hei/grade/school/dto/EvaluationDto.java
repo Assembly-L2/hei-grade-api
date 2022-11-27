@@ -1,4 +1,4 @@
-package hei.grade.school.mapper;
+package hei.grade.school.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class EvaluationMapper {
+public class EvaluationDto {
 
     private LocalDate dateExam;
 

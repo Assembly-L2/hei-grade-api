@@ -1,6 +1,6 @@
 package hei.grade.school.service;
 
-import hei.grade.school.mapper.GradeMapper;
+import hei.grade.school.dto.GradeDto;
 import hei.grade.school.model.Grade;
 import hei.grade.school.repository.EvalutionRepository;
 import hei.grade.school.repository.GradeRepository;
@@ -30,17 +30,17 @@ public class GradeService {
     }
 
     // Create a grade
-    public Grade createGrade(GradeMapper gradeMapper){
+    public Grade createGrade(GradeDto gradeDto){
         Grade newGrade = new Grade();
         try {
-            if(gradeMapper.getId_evaluation()!=null){
-                newGrade.setEvaluation(evalutionRepository.findById(gradeMapper.getId_evaluation()).get());
+            if(gradeDto.getId_evaluation()!=null){
+                newGrade.setEvaluation(evalutionRepository.findById(gradeDto.getId_evaluation()).get());
             }
-            if(gradeMapper.getMark()!=null){
-                newGrade.setMark(gradeMapper.getMark());
+            if(gradeDto.getMark()!=null){
+                newGrade.setMark(gradeDto.getMark());
             }
-            if(gradeMapper.getUser_id()!=null){
-                newGrade.setUser(usersRepository.findById(gradeMapper.getUser_id()).get());
+            if(gradeDto.getUser_id()!=null){
+                newGrade.setUser(usersRepository.findById(gradeDto.getUser_id()).get());
             }
            gradeRepository.save(newGrade);
         } catch (ResponseStatusException e) {
@@ -52,7 +52,7 @@ public class GradeService {
 
     // Update a grade
     @Transactional
-    public Grade updateGrade(String id, GradeMapper gradeMapper){
+    public Grade updateGrade(String id, GradeDto gradeDto){
         boolean gradeExists = gradeRepository.existsById(id);
         if (!gradeExists) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -62,16 +62,16 @@ public class GradeService {
         Grade newGrade = gradeRepository.findById(id).get();
         try {
 
-            if(gradeMapper.getId_evaluation()!=null
-                    && !evalutionRepository.findById(gradeMapper.getId_evaluation()).get().equals(newGrade.getEvaluation())){
-                newGrade.setEvaluation(evalutionRepository.findById(gradeMapper.getId_evaluation()).get());
+            if(gradeDto.getId_evaluation()!=null
+                    && !evalutionRepository.findById(gradeDto.getId_evaluation()).get().equals(newGrade.getEvaluation())){
+                newGrade.setEvaluation(evalutionRepository.findById(gradeDto.getId_evaluation()).get());
             }
-            if(gradeMapper.getMark()!=null && !gradeMapper.getMark().equals(newGrade.getMark())){
-                newGrade.setMark(gradeMapper.getMark());
+            if(gradeDto.getMark()!=null && !gradeDto.getMark().equals(newGrade.getMark())){
+                newGrade.setMark(gradeDto.getMark());
             }
-            if(gradeMapper.getUser_id()!=null
-                    && !evalutionRepository.findById(gradeMapper.getUser_id()).get().equals(newGrade.getUser())){
-                newGrade.setUser(usersRepository.findById(gradeMapper.getUser_id()).get());
+            if(gradeDto.getUser_id()!=null
+                    && !evalutionRepository.findById(gradeDto.getUser_id()).get().equals(newGrade.getUser())){
+                newGrade.setUser(usersRepository.findById(gradeDto.getUser_id()).get());
             }
             gradeRepository.save(newGrade);
         } catch (ResponseStatusException e) {

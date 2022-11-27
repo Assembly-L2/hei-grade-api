@@ -1,18 +1,13 @@
-package hei.grade.school.mapper;
+package hei.grade.school.dto;
 
-import hei.grade.school.model.Evaluation;
-import hei.grade.school.model.Users;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 @AllArgsConstructor
 @Getter
 @Setter
-public class GradeMapper {
+public class GradeDto {
 
     private Float mark;
 

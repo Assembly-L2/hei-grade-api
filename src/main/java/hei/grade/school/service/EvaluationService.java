@@ -1,6 +1,6 @@
 package hei.grade.school.service;
 
-import hei.grade.school.mapper.EvaluationMapper;
+import hei.grade.school.dto.EvaluationDto;
 import hei.grade.school.model.Evaluation;
 import hei.grade.school.repository.CourseRepository;
 import hei.grade.school.repository.EvalutionRepository;
@@ -31,24 +31,24 @@ public class EvaluationService {
     }
 
     // Create evaluation
-    public Evaluation createEvaluation(EvaluationMapper evaluationMapper){
+    public Evaluation createEvaluation(EvaluationDto evaluationDto){
         Evaluation newEvaluation = new Evaluation();
 
         try {
-            if(evaluationMapper.getDateExam()!=null){
-                String date = evaluationMapper.getDateExam().toString();
+            if(evaluationDto.getDateExam()!=null){
+                String date = evaluationDto.getDateExam().toString();
                 newEvaluation.setDateExam(LocalDate.parse(date));
             }
-            if(evaluationMapper.getStatus()!=null){
+            if(evaluationDto.getStatus()!=null){
 
-                newEvaluation.setStatus(evaluationMapper.getStatus());
+                newEvaluation.setStatus(evaluationDto.getStatus());
             }
-            if(evaluationMapper.getSemester_id()!=null){
+            if(evaluationDto.getSemester_id()!=null){
 
-                newEvaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
+                newEvaluation.setSemester(semesterRepository.findById(evaluationDto.getSemester_id()).get());
             }
-            if (evaluationMapper.getCourse_id()!=null){
-                newEvaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+            if (evaluationDto.getCourse_id()!=null){
+                newEvaluation.setCourse(courseRepository.findById(evaluationDto.getCourse_id()).get());
             }
 
             evalutionRepository.save(newEvaluation);
@@ -61,7 +61,7 @@ public class EvaluationService {
 
 
     @Transactional // Update evaluation by id
-    public Evaluation updateEvaluation(String evaluation_id, EvaluationMapper evaluationMapper){
+    public Evaluation updateEvaluation(String evaluation_id, EvaluationDto evaluationDto){
 
         boolean evaluationExists = evalutionRepository.existsById(evaluation_id);
         if (!evaluationExists) {
@@ -72,24 +72,24 @@ public class EvaluationService {
         try {
             Evaluation evaluation = evalutionRepository.findById(evaluation_id).get();
 
-            if(evaluationMapper.getDateExam()!=null
-                    && !evaluationMapper.getDateExam().equals(evaluation.getDateExam())){
-                String date = String.valueOf(evaluationMapper.getDateExam());
+            if(evaluationDto.getDateExam()!=null
+                    && !evaluationDto.getDateExam().equals(evaluation.getDateExam())){
+                String date = String.valueOf(evaluationDto.getDateExam());
                 evaluation.setDateExam(LocalDate.parse(date));
             }
-            if(evaluationMapper.getStatus()!=null
-                    && !evaluationMapper.getStatus().equals(evaluation.getStatus())){
+            if(evaluationDto.getStatus()!=null
+                    && !evaluationDto.getStatus().equals(evaluation.getStatus())){
 
-                evaluation.setStatus(evaluationMapper.getStatus());
+                evaluation.setStatus(evaluationDto.getStatus());
             }
-            if(evaluationMapper.getSemester_id()!=null
-                    && !semesterRepository.findById(evaluationMapper.getSemester_id()).get().equals(evaluation.getSemester())){
+            if(evaluationDto.getSemester_id()!=null
+                    && !semesterRepository.findById(evaluationDto.getSemester_id()).get().equals(evaluation.getSemester())){
 
-                evaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
+                evaluation.setSemester(semesterRepository.findById(evaluationDto.getSemester_id()).get());
             }
-            if (evaluationMapper.getCourse_id()!=null
-                    && !courseRepository.findById(evaluationMapper.getCourse_id()).get().equals(evaluation.getCourse())){
-                evaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+            if (evaluationDto.getCourse_id()!=null
+                    && !courseRepository.findById(evaluationDto.getCourse_id()).get().equals(evaluation.getCourse())){
+                evaluation.setCourse(courseRepository.findById(evaluationDto.getCourse_id()).get());
             }
 
             evalutionRepository.save(evaluation);

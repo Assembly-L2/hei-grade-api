@@ -1,6 +1,6 @@
 package hei.grade.school.controller;
 
-import hei.grade.school.mapper.UsersMapper;
+import hei.grade.school.dto.UsersDto;
 import hei.grade.school.model.Users;
 import hei.grade.school.service.UsersService;
 import lombok.AllArgsConstructor;
@@ -22,14 +22,14 @@ public class UsersController {
     public Users getUserById(@PathVariable String user_id){ return usersService.getById(user_id); }
 
     @PostMapping()
-    public Users createUser(@RequestBody UsersMapper usersMapper){ return usersService.createUser(usersMapper); }
+    public Users createUser(@RequestBody UsersDto usersDto){ return usersService.createUser(usersDto); }
 
     @PutMapping("/{user_id}")
     public Users updateUser(
             @PathVariable String user_id,
-            @RequestBody UsersMapper usersMapper
+            @RequestBody UsersDto usersDto
     ){
-        return usersService.updateUser(user_id, usersMapper);
+        return usersService.updateUser(user_id, usersDto);
     }
 
     @DeleteMapping("/{user_id}")

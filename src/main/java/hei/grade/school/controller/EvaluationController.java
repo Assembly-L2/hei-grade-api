@@ -1,6 +1,6 @@
 package hei.grade.school.controller;
 
-import hei.grade.school.mapper.EvaluationMapper;
+import hei.grade.school.dto.EvaluationDto;
 import hei.grade.school.model.Evaluation;
 import hei.grade.school.service.EvaluationService;
 import lombok.AllArgsConstructor;
@@ -18,22 +18,22 @@ public class EvaluationController {
     @GetMapping()
     public List<Evaluation> getAllEvaluations(){ return evaluationService.getAllEvaluation(); }
 
-    @GetMapping("/{id}")
-    public Evaluation getEvaluationById(@PathVariable String id){
-        return evaluationService.getEvaluationById(id);
+    @GetMapping("/{evaluation_id}")
+    public Evaluation getEvaluationById(@PathVariable String evaluation_id){
+        return evaluationService.getEvaluationById(evaluation_id);
     }
 
     @PostMapping()
-    public Evaluation createEvaluation(@RequestBody EvaluationMapper evaluationMapper){
-        return evaluationService.createEvaluation(evaluationMapper);
+    public Evaluation createEvaluation(@RequestBody EvaluationDto evaluationDto){
+        return evaluationService.createEvaluation(evaluationDto);
     }
 
     @PutMapping("/{evaluation_id}")
     public Evaluation updateEvaluation(
             @PathVariable String evaluation_id,
-            @RequestBody EvaluationMapper evaluationMapper
+            @RequestBody EvaluationDto evaluationDto
                                        ){
-        return evaluationService.updateEvaluation(evaluation_id, evaluationMapper);
+        return evaluationService.updateEvaluation(evaluation_id, evaluationDto);
     }
 
     @DeleteMapping("/{evalutation_id}")

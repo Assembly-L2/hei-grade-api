@@ -1,17 +1,15 @@
-package hei.grade.school.mapper;
+package hei.grade.school.dto;
 
-import hei.grade.school.model.Groupe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public class UsersMapper {
+public class UsersDto {
     private String firstName;
     private String lastName;
     private Character sex;

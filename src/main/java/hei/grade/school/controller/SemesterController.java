@@ -19,9 +19,9 @@ public class SemesterController {
         return semesterService.findAllSemester();
     }
 
-    @GetMapping("/{id_semester}")
-    public Semester getSemesterById(@PathVariable String id_semester){
-        return semesterService.findSemesterById(id_semester);
+    @GetMapping("/{semester_id}")
+    public Semester getSemesterById(@PathVariable String semester_id){
+        return semesterService.findSemesterById(semester_id);
     }
 
     @PostMapping()
@@ -39,9 +39,9 @@ public class SemesterController {
         return semesterService.updateSemesterById(semester_id, semester);
     }
 
-    @DeleteMapping("/{id_semester}")
-    public String deleteSemesterById(@PathVariable String id_semester){
-         return semesterService.deleteSemesterById(id_semester);
+    @DeleteMapping("/{semester_id}")
+    public String deleteSemesterById(@PathVariable String semester_id){
+         return semesterService.deleteSemesterById(semester_id);
     }
 
 }

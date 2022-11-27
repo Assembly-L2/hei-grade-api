@@ -34,22 +34,22 @@ public class CourseController {
         return courseService.getAllCourse();
     }
 
-    @GetMapping("/{id}") // Get course by id
+    @GetMapping("/{course_id}") // Get course by id
     public Course getCourseById(
-            @PathVariable("id") String id) throws ResponseStatusException {
-        return courseService.getCourseById(id);
+            @PathVariable("course_id") String course_id) throws ResponseStatusException {
+        return courseService.getCourseById(course_id);
     }
 
-    @PutMapping("/{id}") // Update course by id
+    @PutMapping("/{course_id}") // Update course by id
     public Course updateCourseById(
-            @PathVariable("id") String id,
+            @PathVariable("course_id") String course_id,
             @RequestBody() Course course) throws ResponseStatusException {
-        return courseService.updateCourseById(id, course);
+        return courseService.updateCourseById(course_id, course);
     }
 
-    @DeleteMapping("/{id}") // Delete course by id
+    @DeleteMapping("/{course_id}") // Delete course by id
     public String deleteCourseById(
-            @PathVariable("id") String id) throws ResponseStatusException {
-        return courseService.deleteCourseById(id);
+            @PathVariable("course_id") String course_id) throws ResponseStatusException {
+        return courseService.deleteCourseById(course_id);
     }
 }
