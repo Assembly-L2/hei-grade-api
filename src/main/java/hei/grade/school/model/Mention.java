@@ -27,4 +27,10 @@ public class Mention {
     private String name;
     private Float startNote;
     private Float endNote;
+
+    public Mention(String name, Float startNote, Float endNote){
+        this.name=name;
+        this.startNote=startNote;
+        this.endNote=endNote;
+    }
 }

@@ -10,26 +10,27 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/grades")
 public class GradeController {
 
     private GradeService gradeService;
 
-    @GetMapping("/grades")
+    @GetMapping()
     public List<Grade> getAllGrades(){ return gradeService.getAllGrades(); }
 
-    @GetMapping("/grade/{grade_id}")
+    @GetMapping("/{grade_id}")
     public Grade getGradeById(@PathVariable String grade_id){ return gradeService.getGradeBYId(grade_id); }
 
-    @PostMapping("/grade")
+    @PostMapping()
     public Grade createGrade(@RequestBody GradeMapper gradeMapper){ return gradeService.createGrade(gradeMapper); }
 
-    @PutMapping("/grade/{grade_id}")
+    @PutMapping("/{grade_id}")
     public Grade updateGrade(
             @PathVariable String grade_id,
             @RequestBody GradeMapper gradeMapper
     ){ return gradeService.updateGrade(grade_id, gradeMapper); }
 
-    @DeleteMapping("/grade/{id_grade}")
-    public String deleteGrade(@PathVariable String id_grade){ return gradeService.deleteGradeById(id_grade); }
+    @DeleteMapping("/{grade_id}")
+    public String deleteGrade(@PathVariable String grade_id){ return gradeService.deleteGradeById(grade_id); }
 
 }

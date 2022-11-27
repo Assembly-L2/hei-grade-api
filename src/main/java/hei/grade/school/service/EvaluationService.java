@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -34,10 +35,21 @@ public class EvaluationService {
         Evaluation newEvaluation = new Evaluation();
 
         try {
-            newEvaluation.setDateExam(evaluationMapper.getDateExam());
-            newEvaluation.setStatus(evaluationMapper.getStatus());
-            newEvaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
-            newEvaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+            if(evaluationMapper.getDateExam()!=null){
+                String date = evaluationMapper.getDateExam().toString();
+                newEvaluation.setDateExam(LocalDate.parse(date));
+            }
+            if(evaluationMapper.getStatus()!=null){
+
+                newEvaluation.setStatus(evaluationMapper.getStatus());
+            }
+            if(evaluationMapper.getSemester_id()!=null){
+
+                newEvaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
+            }
+            if (evaluationMapper.getCourse_id()!=null){
+                newEvaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+            }
 
             evalutionRepository.save(newEvaluation);
         } catch (ResponseStatusException e) {
@@ -60,10 +72,25 @@ public class EvaluationService {
         try {
             Evaluation evaluation = evalutionRepository.findById(evaluation_id).get();
 
-            evaluation.setDateExam(evaluationMapper.getDateExam());
-            evaluation.setStatus(evaluationMapper.getStatus());
-            evaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
-            evaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+            if(evaluationMapper.getDateExam()!=null
+                    && !evaluationMapper.getDateExam().equals(evaluation.getDateExam())){
+                String date = String.valueOf(evaluationMapper.getDateExam());
+                evaluation.setDateExam(LocalDate.parse(date));
+            }
+            if(evaluationMapper.getStatus()!=null
+                    && !evaluationMapper.getStatus().equals(evaluation.getStatus())){
+
+                evaluation.setStatus(evaluationMapper.getStatus());
+            }
+            if(evaluationMapper.getSemester_id()!=null
+                    && !semesterRepository.findById(evaluationMapper.getSemester_id()).get().equals(evaluation.getSemester())){
+
+                evaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
+            }
+            if (evaluationMapper.getCourse_id()!=null
+                    && !courseRepository.findById(evaluationMapper.getCourse_id()).get().equals(evaluation.getCourse())){
+                evaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+            }
 
             evalutionRepository.save(evaluation);
         } catch (ResponseStatusException e) {

@@ -25,9 +25,11 @@ public class Grade {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private Users users;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "id_evaluation")
     private Evaluation evaluation;
+
+
 }

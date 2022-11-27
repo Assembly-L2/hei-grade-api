@@ -1,6 +1,5 @@
 package hei.grade.school.controller;
 
-import hei.grade.school.mapper.SemesterMapper;
 import hei.grade.school.model.Semester;
 import hei.grade.school.service.SemesterService;
 import lombok.AllArgsConstructor;
@@ -10,36 +9,37 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/semesters")
 public class SemesterController {
 
     public SemesterService semesterService;
 
-    @GetMapping("/semesters")
+    @GetMapping()
     public List<Semester> getAllSemester(){
         return semesterService.findAllSemester();
     }
 
-    @GetMapping("/semester/{id_semester}")
+    @GetMapping("/{id_semester}")
     public Semester getSemesterById(@PathVariable String id_semester){
         return semesterService.findSemesterById(id_semester);
     }
 
-    @PostMapping("/semester")
+    @PostMapping()
     public Semester createSemester(
-            @RequestBody SemesterMapper semesterMapper
+            @RequestBody Semester semester
     ){
-        return semesterService.addSemester(semesterMapper);
+        return semesterService.addSemester(semester);
     }
 
-    @PutMapping("/semester/{semester_id}")
+    @PutMapping("/{semester_id}")
     public Semester updateSemester(
             @PathVariable String semester_id,
-            @RequestBody SemesterMapper semesterMapper
+            @RequestBody Semester semester
     ){
-        return semesterService.updateSemesterById(semester_id, semesterMapper);
+        return semesterService.updateSemesterById(semester_id, semester);
     }
 
-    @DeleteMapping("/semester/{id_semester}")
+    @DeleteMapping("/{id_semester}")
     public String deleteSemesterById(@PathVariable String id_semester){
          return semesterService.deleteSemesterById(id_semester);
     }

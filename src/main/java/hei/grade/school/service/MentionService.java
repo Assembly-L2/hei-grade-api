@@ -1,6 +1,5 @@
 package hei.grade.school.service;
 
-import hei.grade.school.mapper.MentionMapper;
 import hei.grade.school.model.Mention;
 import hei.grade.school.repository.MentionRepository;
 import lombok.AllArgsConstructor;
@@ -23,12 +22,18 @@ public class MentionService {
     public Mention getMentionById(String id_mention){ return mentionRepository.findById(id_mention).get(); }
 
     // Create mention
-    public Mention createMention(MentionMapper mentionMapper){
+    public Mention createMention(Mention mention){
         Mention newMention = new Mention();
         try {
-            newMention.setName(mentionMapper.getName());
-            newMention.setStartNote(mentionMapper.getStartNote());
-            newMention.setEndNote(mentionMapper.getEndNote());
+            if(mention.getEndNote()!=null){
+                newMention.setEndNote(mention.getEndNote());
+            }
+            if(mention.getStartNote()!=null){
+                newMention.setStartNote(mention.getStartNote());
+            }
+            if(mention.getName()!=null){
+                newMention.setName(mention.getName());
+            }
 
             mentionRepository.save(newMention);
         }catch (ResponseStatusException e){
@@ -40,7 +45,7 @@ public class MentionService {
     }
 
     // Update mention
-    public Mention updateMention(String id_mention, MentionMapper mentionMapper){
+    public Mention updateMention(String id_mention, Mention mention){
         Boolean mentionExists = mentionRepository.existsById(id_mention);
         if(!mentionExists){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -49,9 +54,18 @@ public class MentionService {
 
         Mention newMention = mentionRepository.findById(id_mention).get();
         try {
-            newMention.setName(mentionMapper.getName());
-            newMention.setStartNote(mentionMapper.getStartNote());
-            newMention.setEndNote(mentionMapper.getEndNote());
+            if(mention.getEndNote()!=null
+                    && !mention.getEndNote().equals(newMention.getEndNote())){
+                newMention.setEndNote(mention.getEndNote());
+            }
+            if(mention.getStartNote()!=null
+                    && ! mention.getStartNote().equals(newMention.getStartNote())){
+                newMention.setStartNote(mention.getStartNote());
+            }
+            if(mention.getName()!=null
+                    && !mention.getName().equals(newMention.getName())){
+                newMention.setName(mention.getName());
+            }
 
             mentionRepository.save(newMention);
         }catch (ResponseStatusException e){

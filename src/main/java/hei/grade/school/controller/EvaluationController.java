@@ -10,24 +10,25 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/evaluations")
 public class EvaluationController {
 
     private EvaluationService evaluationService;
 
-    @GetMapping("/evaluations")
+    @GetMapping()
     public List<Evaluation> getAllEvaluations(){ return evaluationService.getAllEvaluation(); }
 
-    @GetMapping("/evaluation/{id}")
+    @GetMapping("/{id}")
     public Evaluation getEvaluationById(@PathVariable String id){
         return evaluationService.getEvaluationById(id);
     }
 
-    @PostMapping("/evaluation")
+    @PostMapping()
     public Evaluation createEvaluation(@RequestBody EvaluationMapper evaluationMapper){
         return evaluationService.createEvaluation(evaluationMapper);
     }
 
-    @PutMapping("evaluation/{evaluation_id}")
+    @PutMapping("/{evaluation_id}")
     public Evaluation updateEvaluation(
             @PathVariable String evaluation_id,
             @RequestBody EvaluationMapper evaluationMapper
@@ -35,8 +36,8 @@ public class EvaluationController {
         return evaluationService.updateEvaluation(evaluation_id, evaluationMapper);
     }
 
-    @DeleteMapping("/evaluation/{id_evalutation}")
-    public String deleteEvaluation(@PathVariable String id_evaluation){
-        return evaluationService.deleteEvaluationById(id_evaluation);
+    @DeleteMapping("/{evalutation_id}")
+    public String deleteEvaluation(@PathVariable String evalutation_id){
+        return evaluationService.deleteEvaluationById(evalutation_id);
     }
 }

@@ -33,4 +33,10 @@ public class Evaluation {
     @ManyToOne
     @JoinColumn(name = "id_Course")
     private Course course;
+
+    public Evaluation(LocalDate dateExam, Boolean status, Semester semester, Course course){
+        this.dateExam=dateExam;
+        this.status=status;
+        this.semester=semester;
+    }
 }

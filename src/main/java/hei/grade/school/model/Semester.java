@@ -36,14 +36,19 @@ public class Semester {
 
     private String name;
 
-    @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate startDate;
 
-    @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate endDate;
 
     private Boolean status;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evaluation> evaluation;
+
+    public Semester(String name, LocalDate startDate, LocalDate endDate, Boolean status){
+        this.name=name;
+        this.status=status;
+        this.startDate= startDate;
+        this.endDate= endDate;
+    }
 }

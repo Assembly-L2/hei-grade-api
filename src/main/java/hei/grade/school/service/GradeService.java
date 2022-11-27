@@ -33,10 +33,15 @@ public class GradeService {
     public Grade createGrade(GradeMapper gradeMapper){
         Grade newGrade = new Grade();
         try {
-           newGrade.setMark(gradeMapper.getMark());
-           newGrade.setUsers(usersRepository.findById(gradeMapper.getUser_id()).get());
-           newGrade.setEvaluation(evalutionRepository.findById(gradeMapper.getId_evaluation()).get());
-
+            if(gradeMapper.getId_evaluation()!=null){
+                newGrade.setEvaluation(evalutionRepository.findById(gradeMapper.getId_evaluation()).get());
+            }
+            if(gradeMapper.getMark()!=null){
+                newGrade.setMark(gradeMapper.getMark());
+            }
+            if(gradeMapper.getUser_id()!=null){
+                newGrade.setUser(usersRepository.findById(gradeMapper.getUser_id()).get());
+            }
            gradeRepository.save(newGrade);
         } catch (ResponseStatusException e) {
             new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -54,13 +59,21 @@ public class GradeService {
                     String.format("Error: Grade with id %s not found in database ", id));
         }
 
-        Grade grade = gradeRepository.findById(id).get();
+        Grade newGrade = gradeRepository.findById(id).get();
         try {
-            grade.setMark(gradeMapper.getMark());
-            grade.setUsers(usersRepository.findById(gradeMapper.getUser_id()).get());
-            grade.setEvaluation(evalutionRepository.findById(gradeMapper.getId_evaluation()).get());
 
-            gradeRepository.save(grade);
+            if(gradeMapper.getId_evaluation()!=null
+                    && !evalutionRepository.findById(gradeMapper.getId_evaluation()).get().equals(newGrade.getEvaluation())){
+                newGrade.setEvaluation(evalutionRepository.findById(gradeMapper.getId_evaluation()).get());
+            }
+            if(gradeMapper.getMark()!=null && !gradeMapper.getMark().equals(newGrade.getMark())){
+                newGrade.setMark(gradeMapper.getMark());
+            }
+            if(gradeMapper.getUser_id()!=null
+                    && !evalutionRepository.findById(gradeMapper.getUser_id()).get().equals(newGrade.getUser())){
+                newGrade.setUser(usersRepository.findById(gradeMapper.getUser_id()).get());
+            }
+            gradeRepository.save(newGrade);
         } catch (ResponseStatusException e) {
             new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Serveur Error: Unable to update grade");
