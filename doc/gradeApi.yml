@@ -657,6 +657,435 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - api: []
+        
+  /groups:
+    post:
+      tags:
+        - Group
+      summary: create new group
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createGroupDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGroupDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+    get:
+      tags:
+        - Group
+      summary: get all groups
+      operationId: getAllGroups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getGroupDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /groups/{group_id}:
+    get:
+      tags:
+        - Group
+      summary: get group by id
+      operationId: getGroupbyId
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGroupDTO'
+    put:
+      tags:
+        - Group
+      summary: Update group by Id
+      operationId: updateGroupById
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createGroupDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGroupDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+    delete:
+      tags:
+        - Group
+      summary: delete group by id
+      operationId: deleteGroupByid
+      parameters:
+        - name: group_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+  /mentions:
+    post:
+      tags:
+        - Mention
+      summary: create new mention
+      operationId: createMention
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createMentionDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMentionDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+    get:
+      tags:
+        - Mention
+      summary: get all mentions
+      operationId: getAllMentions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getMentionDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /mentions/{mention_id}:
+    get:
+      tags:
+        - Mention
+      summary: get mention by id
+      operationId: getMentionbyId
+      parameters:
+        - name: mention_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMentionDTO'
+    put:
+      tags:
+        - Mention
+      summary: Update mention by Id
+      operationId: updateMentionById
+      parameters:
+        - name: mention_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createMentionDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMentionDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+    delete:
+      tags:
+        - Mention
+      summary: delete grade by id
+      operationId: deleteMentionByid
+      parameters:
+        - name: grade_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+  /users:
+    post:
+      tags:
+        - User
+      summary: create new user
+      operationId: createGUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUserDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+    get:
+      tags:
+        - User
+      summary: get all users
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getUserDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /users/{user_id}:
+    get:
+      tags:
+        - User
+      summary: get user by id
+      operationId: getUserbyId
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserDTO'
+    put:
+      tags:
+        - User
+      summary: Update user by Id
+      operationId: updateUserById
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUserDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGroupDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+    delete:
+      tags:
+        - User
+      summary: delete user by id
+      operationId: deleteUserByid
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
 
 components:
   schemas:
@@ -673,18 +1102,11 @@ components:
           type: boolean
 
     getsemesterDTO:
-      type: object
+      allOf:
+        - $ref : '#/components/schemas/createsemesterDTO'
       properties:
         id:
           type: integer
-        name:
-          type: string
-        start_date:
-          type: string
-        end_date:
-          type: string
-        status:
-          type: boolean
 
     createEvaluationDTO:
       type: object
@@ -699,17 +1121,10 @@ components:
           type: integer
 
     getEvaluationDTO:
-      type: object
+      allOf:
+        - $ref : '#/components/schemas/createEvaluationDTO'
       properties:
         id:
-          type: integer
-        date_exam:
-          type: string
-        status:
-          type: boolean
-        semester_id:
-          type: integer
-        course_id:
           type: integer
 
     createCourseDTO:
@@ -719,12 +1134,11 @@ components:
           type: string
 
     getCourseDTO:
-      type: object
+      allOf:
+        - $ref : '#/components/schemas/createCourseDTO'
       properties:
         id:
           type: integer
-        name:
-          type: string
 
     createGradeDTO:
       type: object
@@ -737,18 +1151,11 @@ components:
           type: integer
 
     getGradeDTO:
-      type: object
+      allOf:
+        - $ref : '#/components/schemas/createGradeDTO'
       properties:
         id:
           type: integer
-        mark:
-          type: number
-        user_id:
-          type: integer
-        id_evaluation:
-          type: integer
-
-
 
     getRepordCard:
       type: object
@@ -763,7 +1170,7 @@ components:
             - PARAGRAPH
             - CHECKBOXES
             - MULTIPLE_CHOICE
-        choise:
+        choice:
           type: array
           items:
             type: string
@@ -773,6 +1180,77 @@ components:
           type: integer
           format: int32
 
+    createGroupDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        level:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: boolean
+
+    getGroupDTO:
+      allOf:
+        - $ref : '#/components/schemas/createGroupDTO'
+      properties:
+        id:
+          type: integer
+
+    createMentionDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        start_note:
+          type: string
+        end_note:
+          type: string
+
+    getMentionDTO:
+      allOf:
+        - $ref: '#/components/schemas/createMentionDTO'
+      properties:
+        id:
+          type: integer
+      
+    createUserDTO:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        sex:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        address: 
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+        entrance_date_time:
+          type: string
+          format: date
+        status:
+          type: string
+
+    getUserDTO:
+      allOf:
+        - $ref: '#/components/schemas/createUserDTO'
+      properties:
+        id:
+          type: integer
 
     Exception:
       type: object
