@@ -1,0 +1,859 @@
+openapi: 3.0.1
+info:
+  title: HEI Report card API
+  description: 'this is the HEI Report card API implementation'
+  version: 1.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/HEI-Franklin/hei_Grade_API/1.0.0
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /students/{student_id}/repord_card/{semester_id}:
+    get:
+      tags:
+        - Report Card
+      summary: get student report card by student and semester id
+      operationId: getStudentRepordCardBySemester
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: semester_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRepordCard'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+  /students/{student_id}/final_repord_card:
+    get:
+      tags:
+        - Report Card
+      summary: get student final report card by student and semester id
+      operationId: getStudentFinalRepordCardBySemester
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getsemesterDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+  /semester:
+    post:
+      tags:
+        - Semester
+      summary: create new semester
+      operationId: createSemester
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createsemesterDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getsemesterDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+  /semesters:
+    get:
+      tags:
+        - Semester
+      summary: get all semesters
+      operationId: getAllSemesters
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getsemesterDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /semester/{id}:
+    get:
+      tags:
+        - Semester
+      summary: Get semester by id
+      operationId: getSemesterById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getsemesterDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+  /semester/{semester_id}:
+    put:
+      tags:
+        - Semester
+      summary: Update semester By Id
+      description: 'you can update name start_date end_date status'
+      operationId: UpdateSemesterById
+      parameters:
+        - name: semester_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getsemesterDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /semester/{id_semester}:
+    delete:
+      tags:
+        - Semester
+      operationId: delete semester by Id
+      summary: delete one semester by id
+      parameters:
+        - name: id_semester
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /evaluation:
+    post:
+      tags:
+        - Evaluation
+      summary: create new evaluation
+      operationId: createEvaluation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createEvaluationDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getEvaluationDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /evaluations:
+    get:
+      tags:
+        - Evaluation
+      summary: get all evaluations
+      operationId: getAllEvaluation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getEvaluationDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /evaluation/{id}:
+    get:
+      tags:
+        - Evaluation
+      summary: get evaluation by id
+      operationId: getEvaluationbyId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getEvaluationDTO'
+  /evaluation/{evaluation_id}:
+    put:
+      tags:
+        - Evaluation
+      summary: Update evaluation by Id
+      operationId: updateEvaluationById
+      parameters:
+        - name: evaluation_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createEvaluationDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getEvaluationDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /evaluation/{id_evaluation}:
+    delete:
+      tags:
+        - Evaluation
+      summary: delete evaluation by id
+      operationId: deleteEvaluationByid
+      parameters:
+        - name: id_evaluation
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /course:
+    post:
+      tags:
+        - Course
+      summary: create new course
+      operationId: createCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCourseDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCourseDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /courses:
+    get:
+      tags:
+        - Course
+      summary: get all course
+      operationId: getAllCourse
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getCourseDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /course/{id}:
+    get:
+      tags:
+        - Course
+      summary: get course by id
+      operationId: getCoursebyId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCourseDTO'
+  /course/{course_id}:
+    put:
+      tags:
+        - Course
+      summary: Update course by Id
+      operationId: updateCourseById
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCourseDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCourseDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /course/{id_course}:
+    delete:
+      tags:
+        - Course
+      summary: delete course by id
+      operationId: deleteCourseByid
+      parameters:
+        - name: id_course
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /grade:
+    post:
+      tags:
+        - Grade
+      summary: create new grade
+      operationId: createGrade
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createGradeDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGradeDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /grades:
+    get:
+      tags:
+        - Grade
+      summary: get all grade
+      operationId: getAllGrade
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getGradeDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /grade/{id}:
+    get:
+      tags:
+        - Grade
+      summary: get grade by id
+      operationId: getGradebyId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGradeDTO'
+  /grade/{grade_id}:
+    put:
+      tags:
+        - Grade
+      summary: Update grade by Id
+      operationId: updateGradeById
+      parameters:
+        - name: grade_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createGradeDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGradeDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+  /grade/{id_grade}:
+    delete:
+      tags:
+        - Grade
+      summary: delete grade by id
+      operationId: deleteGradeByid
+      parameters:
+        - name: id_grade
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - api: []
+
+components:
+  schemas:
+    createsemesterDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        status:
+          type: boolean
+
+    getsemesterDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        status:
+          type: boolean
+
+    createEvaluationDTO:
+      type: object
+      properties:
+        date_exam:
+          type: string
+        status:
+          type: boolean
+        semester_id:
+          type: integer
+        course_id:
+          type: integer
+
+    getEvaluationDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        date_exam:
+          type: string
+        status:
+          type: boolean
+        semester_id:
+          type: integer
+        course_id:
+          type: integer
+
+    createCourseDTO:
+      type: object
+      properties:
+        name:
+          type: string
+
+    getCourseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    createGradeDTO:
+      type: object
+      properties:
+        mark:
+          type: integer
+        user_id:
+          type: integer
+        id_evaluation:
+          type: integer
+
+    getGradeDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        mark:
+          type: number
+        user_id:
+          type: integer
+        id_evaluation:
+          type: integer
+
+
+
+    getRepordCard:
+      type: object
+      properties:
+        id:
+          type: string
+        question:
+          type: string
+        type:
+          type: string
+          enum:
+            - PARAGRAPH
+            - CHECKBOXES
+            - MULTIPLE_CHOICE
+        choise:
+          type: array
+          items:
+            type: string
+        formuuid:
+          type: string
+        answerNumber:
+          type: integer
+          format: int32
+
+
+    Exception:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+    BadRequestException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: BadRequestException
+        message: Bad request
+    NotAuthorizedException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: NotAuthorizedException
+        message: Not authorized
+    ResourceNotFoundException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: ResourceNotFoundException
+        message: Resource not found
+    TooManyRequestsException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: TooManyRequestsException
+        message: Too many requests
+    InternalServerException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: InternalServerException
+        message: Unexpected error
+
+  responses:
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestException'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotAuthorizedException'
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceNotFoundException'
+    '429':
+      description: Too many requests to the API
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsException'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerException'
+
+  securitySchemes:
+    api:
+      type: http
+      scheme: bearer
